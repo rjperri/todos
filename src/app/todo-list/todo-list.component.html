@@ -1,0 +1,14 @@
+<mat-form-field>
+    <input matInput placeholder="New Task" #task />
+</mat-form-field>
+<!-- <button mat-raised-button (click)="add(task.value); task.value=''">add</button> -->
+<button mat-fab color="primary" (click)="add(task.value); task.value=''">
+    <mat-icon aria-label="Click to add task to list">add</mat-icon>
+</button>
+<mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let todo of todos">
+        <mat-checkbox [(ngModel)]="todo.completed">
+            <span [ngClass]="{'todo-completed':todo.completed}">{{todo.task}}</span>
+        </mat-checkbox>
+    </mat-list-item>
+</mat-list>
