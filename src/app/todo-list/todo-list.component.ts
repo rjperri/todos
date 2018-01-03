@@ -12,6 +12,7 @@ export class TodoListComponent implements OnInit {
 
     todos: Todo[];
     id: number;
+    thing: string;
 
     constructor(private todoService: TodoService) { }
 
@@ -26,6 +27,10 @@ export class TodoListComponent implements OnInit {
                 this.todos = todos;
                 this.id = this.todos.length + 2;
             });
+    }
+
+    addThing(thing: string) {
+        this.todoService.addThing(thing);
     }
 
     add(task: string) {

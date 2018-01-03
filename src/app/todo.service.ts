@@ -13,4 +13,8 @@ export class TodoService {
         return of(TODOS);
     }
 
+    addThing(thing: string) {
+        localStorage.setItem('thing', thing);
+    }
+
 }

@@ -1,7 +1,6 @@
 <mat-form-field>
     <input matInput placeholder="New Task" #task />
 </mat-form-field>
-<!-- <button mat-raised-button (click)="add(task.value); task.value=''">add</button> -->
 <button mat-fab color="primary" (click)="add(task.value); task.value=''">
     <mat-icon aria-label="Click to add task to list">add</mat-icon>
 </button>
@@ -12,3 +11,10 @@
         </mat-checkbox>
     </mat-list-item>
 </mat-list>
+
+<mat-form-field>
+    <input matInput placeholder="Add Thing" #thing />
+</mat-form-field>
+<button mat-fab color="primary" (click)="addThing(thing.value); thing.value=''">
+    <mat-icon aria-label="Click to add thing to list">add</mat-icon>
+</button>
