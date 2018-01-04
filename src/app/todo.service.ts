@@ -10,11 +10,13 @@ export class TodoService {
     constructor() { }
 
     getTodos(): Observable<Todo[]> {
-        return of(TODOS);
+        return of(<Todo[]>JSON.parse(localStorage.getItem('Todos')));
     }
 
-    addThing(thing: string) {
-        localStorage.setItem('thing', thing);
+    addTodo(todo: Todo) {
+        const todos: Todo[] = <Todo[]>JSON.parse(localStorage.getItem('Todos'));
+        todos.push(todo);
+        localStorage.setItem('todos', JSON.stringify(todos));
     }
 
 }

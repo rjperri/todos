@@ -17,6 +17,7 @@ export class TodoListComponent implements OnInit {
     constructor(private todoService: TodoService) { }
 
     ngOnInit() {
+        debugger;
         this.getTodos();
     }
 
@@ -29,12 +30,14 @@ export class TodoListComponent implements OnInit {
             });
     }
 
-    addThing(thing: string) {
-        this.todoService.addThing(thing);
-    }
+    // addThing(thing: string) {
+    //     this.todoService.addThing(thing);
+    // }
 
     add(task: string) {
-        this.todos.push({id: this.id, task: task, completed: false });
+        const todo: Todo = {id: this.id, task: task, completed: false };
+        this.todoService.addTodo(todo);
+        this.todos.push(todo);
         this.id++;
     }
 
