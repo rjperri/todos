@@ -29,9 +29,22 @@ export class TodoListComponent implements OnInit {
     }
 
     add(task: string) {
-        const todo: Todo = {task: task, completed: false };
-        this.todoService.addTodo(todo);
-        this.todos.push(todo);
+        task = task.trim();
+        if (!task) { return; }
+        this.todoService
+            .addTodo({ task: task, completed: false } as Todo)
+            .subscribe(todo => {
+                this.todos.push(todo);
+            });
+    }
+
+    updateTaskStatus(todo: Todo) {
+        this.todoService
+            .updateTodo(todo)
+            .subscribe(result => {
+                todo = result;
+            });
     }
 
 }
+

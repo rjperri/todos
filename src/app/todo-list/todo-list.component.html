@@ -6,7 +6,7 @@
 </button>
 <mat-list role="list">
     <mat-list-item role="listitem" *ngFor="let todo of todos">
-        <mat-checkbox [(ngModel)]="todo.completed">
+        <mat-checkbox [(ngModel)]="todo.completed" (ngModelChange)="updateTaskStatus(todo)">
             <span [ngClass]="{'todo-completed':todo.completed}">{{todo.task}}</span>
         </mat-checkbox>
     </mat-list-item>
