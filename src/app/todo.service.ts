@@ -37,8 +37,9 @@ export class TodoService {
     }
 
     deleteTodo(todo: Todo): Observable<Todo> {
-        let todos: Todo[] = this.getTodosFromStorage();
-        todos = todos.filter(t => t !== todo);
+        debugger;
+        var todos: Todo[] = this.getTodosFromStorage();
+        todos = todos.filter(t => t.id !== todo.id);
         localStorage.setItem('todos', JSON.stringify(todos));
         return of(null);
     }

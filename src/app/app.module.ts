@@ -5,7 +5,8 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {
     MatInputModule, MatButtonModule, MatSelectModule,
-    MatIconModule, MatListModule, MatCardModule, MatCheckboxModule
+    MatIconModule, MatListModule, MatCardModule, MatCheckboxModule,
+    MatToolbarModule, MatSidenavModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TodoListComponent } from './todo-list/todo-list.component';
@@ -27,6 +28,8 @@ import { TodoService } from './todo.service';
         MatListModule,
         MatCardModule,
         MatCheckboxModule,
+        MatToolbarModule,
+        MatSidenavModule,
         MatIconModule
     ],
     providers: [TodoService],

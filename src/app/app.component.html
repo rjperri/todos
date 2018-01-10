@@ -1,2 +1,9 @@
-<h1>{{title}}</h1>
-<app-todo-list></app-todo-list>
+<mat-toolbar>{{title}}</mat-toolbar>
+<mat-sidenav-container class="container">
+    <mat-sidenav mode="side" opened="true">
+        Future Content Coming!
+    </mat-sidenav>
+    <mat-sidenav-content>
+            <app-todo-list></app-todo-list>
+    </mat-sidenav-content>    
+</mat-sidenav-container>
