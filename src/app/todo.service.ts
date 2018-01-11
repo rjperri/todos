@@ -37,20 +37,30 @@ export class TodoService {
     }
 
     deleteTodo(todo: Todo): Observable<Todo> {
-        debugger;
+        // debugger;
+        // tslint:disable-next-line:no-var-keyword
         var todos: Todo[] = this.getTodosFromStorage();
         todos = todos.filter(t => t.id !== todo.id);
         localStorage.setItem('todos', JSON.stringify(todos));
         return of(null);
     }
 
+    archiveAll(): Observable<Todo[]> {
+        const todos: Todo[] = this.getTodosFromStorage();
+        todos.map(t => t.archived = true);
+        localStorage.setItem('todos', JSON.stringify(todos));
+        return of(todos.filter(t => t.archived !== true););
+    }
+
     private getTodosFromStorage(): Todo[] {
-        const todos: Todo[] = [];
+        // tslint:disable-next-line:no-var-keyword
+        var todos: Todo[] = [];
 
         if (localStorage.getItem('todos') === null) {
             return todos;
         } else {
-            return <Todo[]>JSON.parse(localStorage.getItem('todos'));
+            todos = <Todo[]>JSON.parse(localStorage.getItem('todos'));
+            return todos.filter(t => t.archived !== true);
         }
     }
 }
