@@ -1,6 +1,14 @@
-<mat-card class="todo-input-card">
+<mat-card *ngFor="let todo of todos" >
+    <mat-checkbox [(ngModel)]="todo.completed" (ngModelChange)="updateTaskStatus(todo)">
+        <span [ngClass]="{'todo-completed':todo.completed}">{{todo.task}}</span>
+    </mat-checkbox>
+    <button mat-icon-button color="warn" (click)="deleteTask(todo)">
+        <mat-icon aria-label="Delete task">delete</mat-icon>
+    </button>
+</mat-card>
+<mat-card >
     <mat-form-field>
-        <input matInput placeholder="New Task" #task  (keyup.enter)="add(task.value); task.value=''"/>
+        <input matInput placeholder="New Task" #task (keyup.enter)="add(task.value); task.value=''" />
     </mat-form-field>
     <button mat-fab color="primary" (click)="add(task.value); task.value=''">
         <mat-icon aria-label="Click to add task to list">add</mat-icon>
@@ -9,15 +17,3 @@
         <mat-icon aria-label="Archive List">archive</mat-icon>
     </button>
 </mat-card>
-<mat-list role="list">
-    <mat-list-item role="listitem" *ngFor="let todo of todos" class="todo-item">
-        <mat-card class="todo-card">
-            <mat-checkbox [(ngModel)]="todo.completed" (ngModelChange)="updateTaskStatus(todo)">
-                <span [ngClass]="{'todo-completed':todo.completed}">{{todo.task}}</span>
-            </mat-checkbox>
-            <button mat-icon-button color="warn" (click)="deleteTask(todo)">
-                <mat-icon aria-label="Delete task">delete</mat-icon>
-            </button>
-        </mat-card>
-    </mat-list-item>
-</mat-list>

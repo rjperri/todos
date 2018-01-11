@@ -8,9 +8,5 @@
 
 .todo-card {
     width: 100%;
-}
-
-.todo-input-card {
-    width: 95%;
-    margin-bottom: 40px;
+    display: flex;
 }
