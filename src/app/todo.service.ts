@@ -49,7 +49,7 @@ export class TodoService {
         const todos: Todo[] = this.getTodosFromStorage();
         todos.map(t => t.archived = true);
         localStorage.setItem('todos', JSON.stringify(todos));
-        return of(todos.filter(t => t.archived !== true););
+        return of(todos.filter(t => t.archived !== true));
     }
 
     private getTodosFromStorage(): Todo[] {
