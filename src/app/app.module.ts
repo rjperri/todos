@@ -11,6 +11,9 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoService } from './todo.service';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './in-memory-data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -30,7 +33,14 @@ import { TodoService } from './todo.service';
         MatCheckboxModule,
         MatToolbarModule,
         MatSidenavModule,
-        MatIconModule
+        MatIconModule,
+        HttpClientModule,
+        // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+        // and returns simulated server responses.
+        // Remove it when a real server is ready to receive requests.
+        HttpClientInMemoryWebApiModule.forRoot(
+          InMemoryDataService, { dataEncapsulation: false }
+        )
     ],
     providers: [TodoService],
     bootstrap: [AppComponent]
