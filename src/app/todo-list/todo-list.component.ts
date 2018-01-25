@@ -58,6 +58,7 @@ export class TodoListComponent implements OnInit {
             .archiveAll()
             .subscribe(result => {
                 this.todos = result;
+                debugger;
             });
     }
 

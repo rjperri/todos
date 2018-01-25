@@ -32,54 +32,45 @@ export class TodoService {
     /** POST: add a new todo to the server */
     addTodo(todo: Todo): Observable<Todo> {
         return this.http
-        .post<Todo>(this.todosUrl, todo, httpOptions)
-        .pipe(
-            // tslint:disable-next-line:no-shadowed-variable
-            tap((hero: Todo) => this.log(`added todo w/ id=${todo.id}`)),
-            catchError(this.handleError<Todo>('addTodo'))
-        );
+            .post<Todo>(this.todosUrl, todo, httpOptions)
+            .pipe(
+                // tslint:disable-next-line:no-shadowed-variable
+                tap((hero: Todo) => this.log(`added todo w/ id=${todo.id}`)),
+                catchError(this.handleError<Todo>('addTodo'))
+            );
     }
 
     updateTodo(todo: Todo): Observable<Todo> {
-        const todos: Todo[] = this.getTodosFromStorage();
-        const index = todos.findIndex(t => t.id === todo.id);
-
-        if (index < 0) { return; }
-
-        todos[index] = todo;
-
-        localStorage.setItem('todos', JSON.stringify(todos));
-        return of(todo);
+        return this.http
+            .put(this.todosUrl, todo, httpOptions)
+            .pipe(
+                tap(_ => this.log(`updated todo id=${todo.id}`)),
+                catchError(this.handleError<any>('updateTodo'))
+            )
     }
 
     deleteTodo(todo: Todo): Observable<Todo> {
-        // debugger;
-        // tslint:disable-next-line:no-var-keyword
-        var todos: Todo[] = this.getTodosFromStorage();
-        todos = todos.filter(t => t.id !== todo.id);
-        localStorage.setItem('todos', JSON.stringify(todos));
-        return of(null);
+        const id = typeof todo === 'number' ? todo : todo.id;
+        const url = `${this.todosUrl}/${id}`;
+
+        return this.http
+            .delete<Todo>(url, httpOptions)
+            .pipe(
+                tap(_ => this.log(`deleted todo id=${id}`)),
+                catchError(this.handleError<Todo>('deleteTodo'))
+            );
     }
 
     archiveAll(): Observable<Todo[]> {
-        const todos: Todo[] = this.getTodosFromStorage();
-        todos.map(t => t.archived = true);
-        localStorage.setItem('todos', JSON.stringify(todos));
-        return of(todos.filter(t => t.archived !== true));
+        //This will need to be changed to be on backend
+       return this.http
+        .get<Todo[]>(this.todosUrl)
+        .pipe(
+            tap(todos => this.log('fetching todos')),
+            catchError(this.handleError('getTodos', []))
+        );
     }
 
-    private getTodosFromStorage(): Todo[] {
-        // tslint:disable-next-line:no-var-keyword
-        var todos: Todo[] = [];
-
-        if (localStorage.getItem('todos') === null) {
-            return todos;
-        } else {
-            todos = <Todo[]>JSON.parse(localStorage.getItem('todos'));
-            return todos.filter(t => t.archived !== true);
-        }
-    }
-   
     /**
      * Handle Http operation that failed.
      * Let the app continue.
